@@ -1,0 +1,337 @@
+
+<html lang="en">
+<head>
+  <title>Dating</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+<body>
+	<header>
+		<div class="container" align="center">
+			<span id="title"> BLUUSUN </span>
+			<div class="nav navbar-right">
+				<div class="dropdown">
+			    <button class="btn btn-success dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+			    <span class="glyphicon glyphicon-menu-hamburger"> MENU </span>
+			    <span class="caret"></span></button>
+			    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+			      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ABOUT US</a></li>
+			      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CONTACT</a></li>
+			      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">PRIVACY POLICY</a></li>
+			      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">TERMS OF SERVICE</a></li>
+			    </ul>
+			  </div>
+			</div>
+		</div>
+		<hr>
+		<div class="container" align="center" id="search_list">
+			<div class="nav navbar-left" style="margin:7px;">
+			 	<span class="glyphicon glyphicon-search">
+					<input type="text" placeholder="Search">
+				</span>
+			</div>
+			
+			<select>
+				<option value="" class="label" value="">Gender</option>
+				<option value="1">Male</option>
+				<option value="2">Female</option>
+			</select>
+		
+			<select>
+				<option value="" class="label">Age</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+		        <option value="3">3</option>
+		        <option value="4">4</option>
+		        <option value="5">5</option>
+		        <option value="6">6</option>
+		        <option value="7">7</option>
+		        <option value="8">8</option>
+			</select>
+		
+			<select>
+				<option value="" class="label">Location</option>
+				<option value="2013">2013</option>
+				<option value="2012">2012</option>
+				<option value="2011">2011</option>
+				<option value="2010">2010</option>
+			    <option value="2009">2009</option>
+			    <option value="2008">2008</option>
+			    <option value="2007">2007</option>
+			    <option value="2006">2006</option>
+			</select>
+
+			<select>
+				<option value="" class="label">Interests</option>
+				<option value="2013">2013</option>
+				<option value="2012">2012</option>
+				<option value="2011">2011</option>
+				<option value="2010">2010</option>
+			    <option value="2009">2009</option>
+			    <option value="2008">2008</option>
+			    <option value="2007">2007</option>
+			    <option value="2006">2006</option>
+			</select>
+
+			<div class="nav navbar-right" style="margin:7px;">
+			 	<span class="glyphicon glyphicon-th-large" id='btn_show_grid'></span>
+			 	&nbsp;&nbsp;&nbsp;
+			 	<span class="glyphicon glyphicon-menu-hamburger" id="btn_show_list"></span>
+			</div>
+
+		</div>	
+	</header>
+
+	<div class="container-fluid body-content">  <!-------------  Start content ------------------------ -->
+	  <div class="row" id="list_row">
+
+	    {% for profile in profiles %}
+
+	  	 <div class="col-lg-4 col-md-4 col-xs-6 thumb" style="padding:20px;">
+                <a href={{profile._id}}> <img class="img-rounded" src={{profile.image[0].url}}  width="150" height="150" alt=""> </a>
+            	<span style="margin:20px;">{{profile.name}}</span>
+         </div>
+
+         {% for index in profiles %}
+         	<h1> {{index.index}} </h1>
+         {% endfor %}
+	         
+        {% endfor %}
+
+	  </div>
+
+	  <div class="row" id="grid_row">
+	  	<div class="col-md-2" style="margin-top: 125px;">
+	  		<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+	  	</div>
+	  	<div class="col-md-2">
+	  		<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+	  	</div>
+	  	<div class="col-md-2" style="margin-top: 125px;">
+	  		<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+	  	</div>
+	  	<div class="col-md-2">
+	  		<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+	  	</div>
+	  	<div class="col-md-2" style="margin-top: 125px;">
+	  		<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+	  	</div>
+	  	<div class="col-md-2">
+	  		<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+			<a href="javascript:alert();" id="image_link"> <div id="grid_image"> <span> Maria </span> </div> </a>
+	  	</div>
+	  </div>
+        
+	  
+	</div> <!------------------------- End content ----------------------------------- -->
+
+
+	<footer>
+		<div class="row">
+			<a href="#" class="fa fa-instagram btn default"></a>
+			<a href="#" class="fa fa-facebook btn default"></a>
+			<a href="#" class="fa fa-twitter btn default"></a>			
+		</div>
+		<div class="row" style="font-size:14px;">
+		     <a href="#" class="btn default">  ABOUT US </a>
+		     <a href="#" class="btn default">  CONTACT </a>
+		     <a href="#" class="btn default">  PRIVACY POLICY </a>
+		     <a href="#" class="btn default">  TERMS OF SERVICE </a>	
+		</div>
+		<div class="row" id="copyright">
+				&copy; 2017 BLUUSUN
+		</div>
+	</footer>
+</body>
+</html>
+
+
+<script>
+
+$(document).ready(function(){
+
+	List_show();
+	$("#btn_show_list").click(function(){
+		List_show();
+	});
+
+	$("#btn_show_grid").click(function(){
+		Grid_show();
+	});
+
+	function List_show(){
+		$("#btn_show_grid").css({ opacity: 0.4 });
+		$("#btn_show_list").css({ opacity: 1 });
+		$("#grid_row").hide();
+		$("#list_row").show();
+	}
+	function Grid_show(){
+		$("#btn_show_grid").css({ opacity: 1 });
+		$("#btn_show_list").css({ opacity: 0.4 });
+		$("#grid_row").show();
+		$("#list_row").hide();
+	}
+
+});
+</script>
+
+
+
+
+<style>
+
+	#grid_image {
+		padding-top: 200px;
+	    padding-right: 30%;
+	    margin-top: 20px;
+		width:100%;
+		height:250px;
+		border-radius: 15px;
+	    background: linear-gradient(rgba(0,0,0,0),rgba(255,255,255,0.5),rgba(255,255,255,0.7)), url("photo/1.jpg");
+	    background-size: 100% 100%;
+	    background-repeat: no-repeat;
+	}
+
+	#grid_image span{
+		color:white;
+		font-size:30px;
+	}
+
+	#image_link{
+    	text-decoration: none;
+	}
+
+	html {
+	  height: 100%;
+	}
+	html body {
+	  height: 100%;
+	  overflow: hidden;
+	}
+	html body .container-fluid.body-content {
+	  position: absolute;
+	  top: 13%;
+   	  bottom: 12%;
+      right: 5px;
+      left: 5px;
+	  overflow-y: auto;
+	  text-align: center;  
+	  background: linear-gradient(#bed6e4, #f5f7f9 5%, #f5f7f9 95%, #bed6e4);
+	}
+	header {
+	    position: absolute;
+	    left: 0;
+	    right: 0;
+	    top: 0;
+	}
+	footer {
+	    position: absolute;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    text-align: center;
+	}
+	.navbar-right{
+		margin-top:20px;
+	}
+
+	#title{
+		padding-top:15px;
+		font-size: 47px;
+    	color: #00dcff;
+		font-family: monospace;
+	}
+
+	#search_list{
+		font-size:16px;
+	}
+
+	select {
+        display: inline-block;
+        background-color: #fff;
+        border: solid 1px #BBC5CE;
+        margin: 0;
+        padding: 5px;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+      }
+
+      hr{
+      	margin-top: 8px;
+    	margin-bottom: 10px;
+      }
+
+      .fa {
+		  font-size: 20px;
+		  width: 30px;
+		  text-align: center;
+		  text-decoration: none;
+		}
+
+		.fa:hover {
+		    opacity: 0.7;
+		}
+
+		.img-rounded {
+		    border-radius: 10px;
+		}
+
+		#copyright{
+			padding-bottom:15px;
+			opacity: 0.5;
+		}
+
+		@media screen and (max-width: 450px)
+        {
+           html body .container-fluid.body-content {
+			  position: absolute;
+			  top: 28%;
+		   	  bottom: 15%;
+		      right: 5px;
+		      left: 5px;
+			  overflow-y: auto;
+			  text-align: center;  
+			  background: linear-gradient(#d4caca, white 4%, white 96%, #d4caca);
+			}
+			.navbar-right{
+				margin-top:0px;
+			}
+
+			hr {
+			    margin-top: 5px;
+			    margin-bottom: 0px;
+			}
+
+			#search_list{
+				font-size:13px;
+			}
+
+			.btn{
+			 	padding: 1px 5px;
+			}
+
+			#copyright{
+				padding-bottom:2px;
+				opacity: 0.5;
+			}
+        }
+
+</style>

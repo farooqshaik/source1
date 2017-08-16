@@ -1,0 +1,17 @@
+<div class="row" id="list_row">
+  <% profiles.forEach(function(profile,index) { %>
+		    <div class="col-lg-4 col-md-4 col-sm-6" style="padding:20px;">
+			    <div class="row">
+				    <div class="col-lg-4">
+				    	<a href="<%=profile.url%>"> <img class="img-rounded" src="<%=profile.images[0].url%>"  width="150" height="150" alt=""> </a>
+				    </div>
+				    <div class="col-lg-8">
+				    	<div style="margin:30px;font-size:15px;">
+		            	<div>  <span style="color:#8700ff;font-size:18px;"> <%=profile.name%> </span> </div>
+		            	       		
+	            		</div>
+				    </div>
+			    </div>	                	            		            
+         	</div>
+	<% }); %> 
+</div>

@@ -1,0 +1,321 @@
+
+<html lang="en">
+<head>
+  <title>Dating</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+<body>
+	<header>
+		<div class="container" align="center">
+			<span id="title"> BLUUSUN </span>
+			<div class="nav navbar-right">
+				<div class="dropdown">
+			    <button class="btn btn-success dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+			    <span class="glyphicon glyphicon-menu-hamburger"> MENU </span>
+			    <span class="caret"></span></button>
+			    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+			      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ABOUT US</a></li>
+			      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CONTACT</a></li>
+			      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">PRIVACY POLICY</a></li>
+			      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">TERMS OF SERVICE</a></li>
+			    </ul>
+			  </div>
+			</div>
+		</div>
+		<hr>
+		<div class="container" align="center" id="search_list">
+			<div class="nav navbar-left" style="margin:7px;">
+			 	<span class="glyphicon glyphicon-search"> </span> 
+			 	<input type="text" placeholder="Search" onkeyup="Search();"> </input>
+			</div>
+			
+			<select id="gender_box" onchange="Search();">
+				<option value="0" class="label" value="">Gender</option>
+				<option value="1">Male</option>
+				<option value="2">Female</option>
+			</select>
+		
+			<select id="age_box" onchange="Search()">
+				<option value="0" class="label">Age</option>
+				<option value="1">17-20</option>
+				<option value="2">21-24</option>
+		        <option value="3">25-27</option>
+		        <option value="4">27-30</option>
+		        <option value="5">31-33</option>
+		        <option value="6">34-40</option>
+		        <option value="7">41-50</option>
+			</select>
+		
+			<select id="country_box" onchange="Search()">
+				<option value="" class="label">Location</option>
+				<option value="2013">Vietnam</option>
+				<option value="2012">China</option>
+				<option value="2011">Brazil</option>
+				<option value="2010">Thailand</option>
+			</select>
+
+			<select id="interest_box" onchange="Search()">
+				<option value="" class="label">Interests</option>
+				<option value="2013">2013</option>
+				<option value="2012">2012</option>
+				
+			</select>
+
+			<div class="nav navbar-right" style="margin:7px;">
+			 	<span class="glyphicon glyphicon-th-large" id='btn_show_grid'></span>
+			 	&nbsp;&nbsp;&nbsp;
+			 	<span class="glyphicon glyphicon-menu-hamburger" id="btn_show_list"></span>
+			</div>
+
+		</div>	
+	</header>
+
+	<div class="container-fluid body-content">  <!-------------  Start content ------------------------ -->
+	  <%- include content.ejs %>
+	  
+	</div> <!------------------------- End content ----------------------------------- -->
+
+
+	<footer>
+		<div class="row">
+			<a href="#" class="fa fa-instagram btn default"></a>
+			<a href="#" class="fa fa-facebook btn default"></a>
+			<a href="#" class="fa fa-twitter btn default"></a>			
+		</div>
+		<div class="row" style="font-size:14px;">
+		     <a href="#" class="btn default">  ABOUT US </a>
+		     <a href="#" class="btn default">  CONTACT </a>
+		     <a href="#" class="btn default">  PRIVACY POLICY </a>
+		     <a href="#" class="btn default">  TERMS OF SERVICE </a>	
+		</div>
+		<div class="row" id="copyright">
+				&copy; 2017 BLUUSUN
+		</div>
+	</footer>
+	
+</body>
+</html>
+
+
+<script>
+	$('.container-fluid').scroll(function() {
+	  	sessionStorage.scrollTop = $(this).scrollTop();
+	});
+
+	$(document).ready(function() {
+	  	Show();
+	});
+
+	$("#btn_show_list").click(function(){
+		List_show();
+	});
+
+	$("#btn_show_grid").click(function(){
+		Grid_show();
+	});
+
+	function Show(){
+		if(sessionStorage.scrollTop != "undefined") {
+		    $('.container-fluid').scrollTop(sessionStorage.scrollTop);
+		}
+		if(sessionStorage.list_grid !="undefined"){
+		  	if(sessionStorage.list_grid=="list"){
+		  		List_show();
+		  	} else{
+		  		Grid_show();
+		  	}
+		} else{
+			List_show();
+		}
+	}
+
+	function List_show(){
+		$("#btn_show_grid").css({ opacity: 0.4 });
+		$("#btn_show_list").css({ opacity: 1 });
+		$("#grid_row").hide();
+		$("#list_row").show();
+		sessionStorage.list_grid="list";
+	}
+	function Grid_show(){
+		$("#btn_show_grid").css({ opacity: 1 });
+		$("#btn_show_list").css({ opacity: 0.4 });
+		$("#grid_row").show();
+		$("#list_row").hide();
+		sessionStorage.list_grid="grid";
+	}
+
+	function Search(){
+	
+		var name=$('input').val();
+		var gender=$("#gender_box option:selected").text();
+		var age_band=$("#age_box option:selected").text();
+		var country=$("#country_box option:selected").text();
+		var interest=$("#interest_box option:selected").text();
+		if(gender=="Gender") gender="";
+		if(age_band=="Age") age_band="";
+		if(country=="Location") country="";
+		if(interest=="Interests") interest="";
+
+		$.ajax({
+            url: "/filter?name="+name+"&gender="+gender+"&age_band="+age_band+"&country="+country+"&interest="+interest,
+            method:'post',
+            success: function(result){
+                $('.container-fluid').html(result);
+                Show();
+            }
+        });
+	}
+</script>
+
+
+
+
+<style>
+
+	#grid_image {
+		padding-top: 200px;
+	    padding-right: 30%;
+	    margin-top: 20px;
+		width:100%;
+		height:250px;
+		border-radius: 15px;
+		background: linear-gradient(rgba(0,0,0,0),rgba(255,255,255,0.5),rgba(255,255,255,0.7)), url("images/3.jpg");
+	    background-size: 100% 100%;
+	    background-repeat: no-repeat;
+	}
+
+	#grid_image span{
+		color:white;
+		font-size:30px;
+	}
+
+	#image_link{
+    	text-decoration: none;
+	}
+
+	html {
+	  height: 100%;
+	}
+	html body {
+	  height: 100%;
+	  overflow: hidden;
+	}
+	html body .container-fluid.body-content {
+	  position: absolute;
+	  top: 13%;
+   	  bottom: 12%;
+      right: 5px;
+      left: 5px;
+	  overflow-y: auto;
+	  text-align: center;  
+	  background: linear-gradient(#bed6e4, #f5f7f9 5%, #f5f7f9 95%, #bed6e4);
+	}
+	header {
+	    position: absolute;
+	    left: 0;
+	    right: 0;
+	    top: 0;
+	}
+	footer {
+	    position: absolute;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    text-align: center;
+	}
+	.navbar-right{
+		margin-top:20px;
+	}
+
+	#title{
+		padding-top:15px;
+		font-size: 47px;
+    	color: #00dcff;
+		font-family: monospace;
+	}
+
+	#search_list{
+		font-size:16px;
+	}
+
+	select {
+        display: inline-block;
+        background-color: #fff;
+        border: solid 1px #BBC5CE;
+        margin: 0;
+        padding: 5px;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+      }
+
+      hr{
+      	margin-top: 8px;
+    	margin-bottom: 10px;
+      }
+
+      .fa {
+		  font-size: 20px;
+		  width: 30px;
+		  text-align: center;
+		  text-decoration: none;
+		}
+
+		.fa:hover {
+		    opacity: 0.7;
+		}
+
+		.img-rounded {
+		    border-radius: 10px;
+		}
+
+		#copyright{
+			padding-bottom:15px;
+			opacity: 0.5;
+		}
+
+		@media screen and (max-width: 450px)
+        {
+           html body .container-fluid.body-content {
+			  position: absolute;
+			  top: 28%;
+		   	  bottom: 15%;
+		      right: 5px;
+		      left: 5px;
+			  overflow-y: auto;
+			  text-align: center;  
+			  background: linear-gradient(#d4caca, white 4%, white 96%, #d4caca);
+			}
+			.navbar-right{
+				margin-top:0px;
+			}
+
+			hr {
+			    margin-top: 5px;
+			    margin-bottom: 0px;
+			}
+
+			#search_list{
+				font-size:13px;
+			}
+
+			.btn{
+			 	padding: 1px 5px;
+			}
+
+			#copyright{
+				padding-bottom:2px;
+				opacity: 0.5;
+			}
+        }
+
+</style>
